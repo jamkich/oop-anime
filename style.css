@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui;
+  color: #555;
+  background-color: #a9c9ff;
+  background-image: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.series {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: center;
+}
+
+.anime {
+  margin: 5px;
+  width: 200px;
+  height: 300px;
+}
