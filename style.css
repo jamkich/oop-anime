@@ -27,10 +27,13 @@ body {
   flex-wrap: wrap;
   padding: 5px;
   justify-content: center;
+  overflow: scroll;
+  height: 100vh;
 }
 
 .anime {
-  margin: 5px;
+  margin: 100px 30px auto auto;
   width: 200px;
   height: 300px;
+  border-radius: 2%;
 }

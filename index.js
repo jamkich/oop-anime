@@ -13,12 +13,13 @@ const seriesContainer = document.querySelector('.series');
 
 const renderAnime = data => {
   const html = `
-  <div class="anime" style="background-image: url(${data.image_url})">
+  <div class="anime">
     <div class="anime__data">
+      <img class="anime__img" src="${data.image_url}" />
       <h3 class="anime__name">${data.title}</h3>
       <h4 class="anime__score">score: ${data.score}</h4>
-      <p class="anime__row"><span> type: </span>${data.type}</p>
-      <p class="anime__row"><span>episodes: </span>${data.episodes}</p>
+      <p class="anime__row "><span> type: </span>${data.type}</p>
+      <p class="anime__row "><span>episodes: </span>${data.episodes}</p>
     </div>
   </div>
   `;
