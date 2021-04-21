@@ -40,11 +40,17 @@ class Anime {
 
     seriesContainer.insertAdjacentHTML('beforeend', html);
   }
+
+  deleteAnime() {
+    seriesContainer.style.opacity = '0';
+  }
 }
 
+let a;
 searchButton.addEventListener('click', e => {
+  seriesContainer.style.opacity = '0';
   e.preventDefault();
-  const a = new Anime(searchInput.value);
+  a = new Anime(searchInput.value);
   a.searchAnime();
   searchInput.value = '';
 });

@@ -42,6 +42,7 @@ body {
   margin: auto;
   display: flex;
   margin-top: 20vh;
+  margin-right: 16vw;
   height: 5vh;
   font-size: 2em;
   text-align: center;
