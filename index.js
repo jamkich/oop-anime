@@ -2,12 +2,15 @@
 const seriesContainer = document.querySelector('.series');
 const searchInput = document.querySelector('.inputAnime');
 const searchButton = document.querySelector('.btn');
+
 class Anime {
   constructor(name) {
+    this._clearResults();
     this.name = name;
+    this._searchAnime();
   }
 
-  async searchAnime() {
+  async _searchAnime() {
     try {
       const anime = await fetch(
         `https://api.jikan.moe/v3/search/anime?q=${this.name}`
@@ -16,16 +19,16 @@ class Anime {
       const animeResults = animeData.results;
 
       animeResults.forEach(e => {
-        this.renderAnime(e);
+        this._renderAnime(e);
       });
 
       seriesContainer.style.opacity = 1;
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   }
 
-  renderAnime(data) {
+  _renderAnime(data) {
     const html = `
     <div class="anime">
       <div class="anime__data">
@@ -41,16 +44,20 @@ class Anime {
     seriesContainer.insertAdjacentHTML('beforeend', html);
   }
 
-  deleteAnime() {
-    seriesContainer.style.opacity = '0';
+  _clearResults() {
+    seriesContainer.innerHTML = '';
+    seriesContainer.style.opacity = 0;
   }
 }
 
 let a;
 searchButton.addEventListener('click', e => {
-  seriesContainer.style.opacity = '0';
   e.preventDefault();
+
+  if (!searchInput.value || searchInput.value.length < 3)
+    alert('Type correct name!');
+
   a = new Anime(searchInput.value);
-  a.searchAnime();
   searchInput.value = '';
+  searchInput.blur();
 });

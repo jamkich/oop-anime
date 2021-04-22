@@ -55,7 +55,15 @@ body {
   height: 5vh;
   margin-top: 20vh;
   margin-left: -15vw;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
+
+.btn:hover {
+  border: 1px solid white;
+}
+
 .svg-icon {
   width: 5vh;
   height: 5vh;
