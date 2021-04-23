@@ -2,15 +2,17 @@
 const seriesContainer = document.querySelector('.series');
 const searchInput = document.querySelector('.inputAnime');
 const searchButton = document.querySelector('.btn');
+const sortSection = document.querySelector('.sort');
+const select = document.querySelector('.select');
 
 class Anime {
   constructor(name) {
     this._clearResults();
     this.name = name;
-    this._searchAnime();
+    this._fetchAnime();
   }
 
-  async _searchAnime() {
+  async _fetchAnime() {
     try {
       const anime = await fetch(
         `https://api.jikan.moe/v3/search/anime?q=${this.name}`
@@ -23,8 +25,9 @@ class Anime {
       });
 
       seriesContainer.style.opacity = 1;
+      sortSection.style.opacity = 1;
     } catch (err) {
-      alert(err);
+      // alert(err);
     }
   }
 
@@ -47,17 +50,35 @@ class Anime {
   _clearResults() {
     seriesContainer.innerHTML = '';
     seriesContainer.style.opacity = 0;
+    sortSection.style.opacity = 0;
   }
 }
 
-let a;
+const addError = () => {
+  searchInput.classList.add('shake');
+  setTimeout(() => alert('Type correct name!'), 100);
+};
+
+const removeError = () => {
+  searchInput.classList.remove('shake');
+};
+
 searchButton.addEventListener('click', e => {
   e.preventDefault();
-
-  if (!searchInput.value || searchInput.value.length < 3)
-    alert('Type correct name!');
-
-  a = new Anime(searchInput.value);
+  if (!searchInput.value || searchInput.value.length < 3) {
+    addError();
+  } else {
+    new Anime(searchInput.value);
+  }
   searchInput.value = '';
   searchInput.blur();
+});
+
+searchInput.addEventListener('change', removeError);
+
+// objs.sort((a,b) => (a.last_nom > b.last_nom) ? 1 : ((b.last_nom > a.last_nom) ? -1 : 0))
+select.addEventListener('change', e => {
+  if (e.target.value == 'score') {
+    console.log('XDDDDDD');
+  }
 });

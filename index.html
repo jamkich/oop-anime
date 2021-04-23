@@ -11,9 +11,16 @@
   <body>
     <main class="container">
       <form class="searchForm">
+        <label for="Sort" class="sort">Sort by:</label>
+        <select id="imie" class="sort select">
+          <option value=""></option>
+          <option value="score">Score</option>
+          <option value="episodes">Episodes</option>
+          <option value="rDate">Release Date</option>
+        </select>
         <input
           type="text"
-          placeholder="Search anime, manga etc."
+          placeholder="Search anime, manga etc. 🐶"
           class="inputAnime"
         />
         <button class="btn">

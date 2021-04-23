@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --dark-grey: #2e3246;
+  --main-blue: #4691f6;
+}
 
 html {
   font-size: 62.5%;
@@ -11,9 +15,9 @@ html {
 
 body {
   font-family: system-ui;
-  color: #555;
-  background-color: #a9c9ff;
-  background-image: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%);
+  color: white;
+  background-color: var(--dark-grey);
+  /* background-image: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%); */
   min-height: 100vh;
 }
 
@@ -23,6 +27,29 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
   }
 }
 
@@ -50,6 +77,15 @@ body {
   flex-grow: 1;
   float: left;
 }
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 2em #ffb700;
+}
+
 .btn {
   background-color: rgba(2, 2, 2, 0);
   height: 5vh;
@@ -58,6 +94,23 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
+}
+
+.sort {
+  opacity: 0;
+  height: 5vh;
+  margin-top: 20vh;
+  margin-right: 1vw;
+  color: var(--main-blue);
+  font-weight: 500;
+  font-size: 2rem;
+  transition: opacity 1s ease-in-out;
+}
+
+.select {
+  background-color: var(--dark-grey);
+  color: white;
+  border: none;
 }
 
 .btn:hover {
@@ -72,11 +125,11 @@ body {
 .svg-icon path,
 .svg-icon polygon,
 .svg-icon rect {
-  fill: #4691f6;
+  fill: var(--main-blue);
 }
 
 .svg-icon circle {
-  stroke: #4691f6;
+  stroke: var(--main-blue);
   stroke-width: 1;
 }
 
@@ -88,11 +141,11 @@ body {
   overflow: scroll;
   height: 100vh;
   margin-top: 15vh;
-  background-color: #8ec5fc;
+  background-color: #242e3d;
   border: 10px solid #eee;
   border-radius: 3%;
-  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
-  transition: opacity 2s ease-in-out;
+  /* background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%); */
+  transition: opacity 1s ease-in-out;
 }
 
 .anime {
