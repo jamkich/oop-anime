@@ -3,7 +3,8 @@ const seriesContainer = document.querySelector('.series');
 const searchInput = document.querySelector('.inputAnime');
 const searchButton = document.querySelector('.btn');
 const sortSection = document.querySelector('.sort');
-const select = document.querySelector('.select');
+const sortOptions = document.querySelector('.select');
+const loadingArrow = document.querySelector('.placeholder');
 
 class Anime {
   constructor(name) {
@@ -20,11 +21,16 @@ class Anime {
       );
       const animeData = await anime.json();
       this.animeResults = animeData.results;
-      this.animeResults.forEach(e => {
-        this.renderAnime(e); <!-- <option value="start_date">Release Date</option>
-      });
 
-      this._showResults();
+      loadingArrow.classList.add('loading');
+
+      setTimeout(() => {
+        loadingArrow.classList.remove('loading');
+        this.animeResults.forEach(e => {
+          this.renderAnime(e);
+        });
+        this._showResults();
+      }, 2000);
     } catch (err) {
       alert(err);
     }
@@ -65,7 +71,7 @@ class Anime {
   _showResults() {
     seriesContainer.style.opacity = 1;
     sortSection.style.opacity = 1;
-    select.style.opacity = 1;
+    sortOptions.style.opacity = 1;
   }
 }
 
@@ -77,7 +83,7 @@ const addError = () => {
 const removeError = () => {
   searchInput.classList.remove('shake');
 };
- <!-- <option value="start_date">Release Date</option>
+
 let a;
 searchButton.addEventListener('click', e => {
   e.preventDefault();
@@ -92,6 +98,6 @@ searchButton.addEventListener('click', e => {
 
 searchInput.addEventListener('change', removeError);
 
-select.addEventListener('change', e => {
+sortOptions.addEventListener('change', e => {
   a.sortSeries(e.target.value);
 });
