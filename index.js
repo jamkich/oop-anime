@@ -10,6 +10,7 @@ class Anime {
     this._clearResults();
     this.name = name;
     this._fetchAnime();
+    this.animeResults;
   }
 
   async _fetchAnime() {
@@ -18,20 +19,18 @@ class Anime {
         `https://api.jikan.moe/v3/search/anime?q=${this.name}`
       );
       const animeData = await anime.json();
-      const animeResults = animeData.results;
-
-      animeResults.forEach(e => {
-        this._renderAnime(e);
+      this.animeResults = animeData.results;
+      this.animeResults.forEach(e => {
+        this.renderAnime(e); <!-- <option value="start_date">Release Date</option>
       });
 
-      seriesContainer.style.opacity = 1;
-      sortSection.style.opacity = 1;
+      this._showResults();
     } catch (err) {
-      // alert(err);
+      alert(err);
     }
   }
 
-  _renderAnime(data) {
+  renderAnime(data) {
     const html = `
     <div class="anime">
       <div class="anime__data">
@@ -52,6 +51,22 @@ class Anime {
     seriesContainer.style.opacity = 0;
     sortSection.style.opacity = 0;
   }
+
+  sortSeries(atr) {
+    this._clearResults();
+    const sortedSeries = this.animeResults.sort((a, b) =>
+      a[atr] > b[atr] ? -1 : b[atr] > a[atr] ? 1 : 0
+    );
+
+    sortedSeries.forEach(e => this.renderAnime(e));
+    this._showResults();
+  }
+
+  _showResults() {
+    seriesContainer.style.opacity = 1;
+    sortSection.style.opacity = 1;
+    select.style.opacity = 1;
+  }
 }
 
 const addError = () => {
@@ -62,13 +77,14 @@ const addError = () => {
 const removeError = () => {
   searchInput.classList.remove('shake');
 };
-
+ <!-- <option value="start_date">Release Date</option>
+let a;
 searchButton.addEventListener('click', e => {
   e.preventDefault();
   if (!searchInput.value || searchInput.value.length < 3) {
     addError();
   } else {
-    new Anime(searchInput.value);
+    a = new Anime(searchInput.value);
   }
   searchInput.value = '';
   searchInput.blur();
@@ -76,9 +92,6 @@ searchButton.addEventListener('click', e => {
 
 searchInput.addEventListener('change', removeError);
 
-// objs.sort((a,b) => (a.last_nom > b.last_nom) ? 1 : ((b.last_nom > a.last_nom) ? -1 : 0))
 select.addEventListener('change', e => {
-  if (e.target.value == 'score') {
-    console.log('XDDDDDD');
-  }
+  a.sortSeries(e.target.value);
 });
